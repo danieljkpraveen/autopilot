@@ -4,11 +4,15 @@ from tabulate import tabulate
 import csv
 
 # Replace with your firewall details
-hostname = "your_firewall_ip"
-api_key = "YOUR_API_KEY"
+hostname = input("Enter firewall IP/hostname: ").strip()
+username = input("Enter username: ").strip()
+password = input("password: ").strip()
+# api_key = "YOUR_API_KEY"
 
 # Connect to the firewall
-fw = Firewall(hostname, api_key=api_key)
+print("Connecting to the firewall...")
+# fw = Firewall(hostname, api_key=api_key)
+fw = Firewall(hostname, username, password)
 
 # Available log types (from PAN-OS CLI documentation)
 valid_log_types = [

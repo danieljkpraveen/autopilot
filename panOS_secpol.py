@@ -1,21 +1,28 @@
 from panos.firewall import Firewall
-from panos.policies import SecurityRule
+from panos.policies import Rulebase, SecurityRule
 
 # Connect to the firewall
 hostname = input("Enter firewall IP/hostname: ").strip()
-api_key = input("Enter API key: ").strip()
+username = input("Enter username: ").strip()
+password = input("password: ").strip()
+# api_key = "YOUR_API_KEY"
 
-fw = Firewall(hostname, api_key=api_key)
+# Connect to the firewall
+print("Connecting to the firewall...")
+# fw = Firewall(hostname, api_key=api_key)
+fw = Firewall(hostname, username, password)
+
+rulebase = fw.add(Rulebase())
 
 # Get user inputs for the rule
-rule_name = input("Enter rule name: ").strip()
-from_zone = input("Enter source zone: ").strip()
-to_zone = input("Enter destination zone: ").strip()
-source_ip = input("Enter source IP (or 'any'): ").strip() or "any"
-destination_ip = input("Enter destination IP (or 'any'): ").strip() or "any"
-application = input("Enter application (or 'any'): ").strip() or "any"
-service = input("Enter service (or 'application-default' or 'any'): ").strip() or "application-default"
-action = input("Enter action (allow/deny/drop): ").strip().lower()
+rule_name = input("Enter rule name: ").strip() # AllowSSH
+from_zone = input("Enter source zone: ").strip() # any
+to_zone = input("Enter destination zone: ").strip() # any
+source_ip = input("Enter source IP (or 'any'): ").strip() or "any" # any
+destination_ip = input("Enter destination IP (or 'any'): ").strip() or "any" # any
+application = input("Enter application (or 'any'): ").strip() or "any" # ssh
+service = input("Enter service (or 'application-default' or 'any'): ").strip() or "application-default" # application-default
+action = input("Enter action (allow/deny/drop): ").strip().lower() # allow
 
 # Create rule object
 rule = SecurityRule(
@@ -30,10 +37,13 @@ rule = SecurityRule(
 )
 
 # Attach to firewall and apply
-fw.add(rule)
+# fw.add(rule)
 
-try:
-    rule.apply()  # or use rule.create() if preferred
-    print(f"✅ Rule '{rule_name}' created successfully.")
-except Exception as e:
-    print(f"❌ Failed to create rule: {e}")
+# try:
+#     rule.apply()  # or use rule.create() if preferred
+#     print(f"✅ Rule '{rule_name}' created successfully.")
+# except Exception as e:
+#     print(f"❌ Failed to create rule: {e}")
+
+rulebase.add(rule)
+rule.create()
