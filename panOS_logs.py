@@ -4,9 +4,9 @@ from tabulate import tabulate
 import csv
 
 # Replace with your firewall details
-hostname = input("Enter firewall IP/hostname: ").strip()
-username = input("Enter username: ").strip()
-password = input("password: ").strip()
+hostname = "192.168.29.55"
+username = "admin"
+password = "P@ssw0rd"
 # api_key = "YOUR_API_KEY"
 
 # Connect to the firewall

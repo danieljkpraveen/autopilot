@@ -2,15 +2,20 @@ from panos.firewall import Firewall
 from panos.updater import SoftwareUpdater
 
 # Replace with your firewall details
-hostname = input("Enter firewall IP/hostname: ").strip()
-username = input("Enter username: ").strip()
-password = input("password: ").strip()
+# hostname = input("Enter firewall IP/hostname: ").strip()
+# username = input("Enter username: ").strip()
+# password = input("password: ").strip()
+hostname = "192.168.29.55"
+username = "admin"
+password = "P@ssw0rd"
 # api_key = "YOUR_API_KEY"
 
 # Connect to the firewall
 print("Connecting to the firewall...")
 # fw = Firewall(hostname, api_key=api_key)
 fw = Firewall(hostname, username, password)
+
+
 
 # Attach the SoftwareUpdater
 print("Initializing software updater...")

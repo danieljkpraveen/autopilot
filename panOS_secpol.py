@@ -2,9 +2,9 @@ from panos.firewall import Firewall
 from panos.policies import Rulebase, SecurityRule
 
 # Connect to the firewall
-hostname = input("Enter firewall IP/hostname: ").strip()
-username = input("Enter username: ").strip()
-password = input("password: ").strip()
+hostname = "192.168.29.55"
+username = "admin"
+password = "P@ssw0rd"
 # api_key = "YOUR_API_KEY"
 
 # Connect to the firewall
@@ -39,11 +39,13 @@ rule = SecurityRule(
 # Attach to firewall and apply
 # fw.add(rule)
 
-# try:
-#     rule.apply()  # or use rule.create() if preferred
-#     print(f"✅ Rule '{rule_name}' created successfully.")
-# except Exception as e:
-#     print(f"❌ Failed to create rule: {e}")
+try:
+    # rule.apply()  # or use rule.create() if preferred
+    rulebase.add(rule)
+    rule.create()
+    print(f"✅ Rule '{rule_name}' created successfully.")
+except Exception as e:
+    print(f"❌ Failed to create rule: {e}")
 
-rulebase.add(rule)
-rule.create()
+# rulebase.add(rule)
+# rule.create()
